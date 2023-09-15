@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Lista mascotas</title>
 </head>
 <body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista mascotas</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/nuevaMascota'}">Nueva Mascota</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'/Inicio'}">Regresar</a>
+        </div>
 
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Genero</th>
+                <th>Edad</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Vacunado</th>
+                <th>Desparasitado</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:each="mascotas, info : ${listaMascotas}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${mascotas.nombreMascota}"></td>
+                <td th:text="${mascotas.generoMascota}"></td>
+                <td th:text="${mascotas.edadMascota}"></td>
+                <td th:text="${mascotas.vacunado}"></td>
+                <td th:text="${mascotas.desparasitado}"></td>
+                <td><a class="btn btn-primary" th:href="@{'/Inicio/editMascota/edit?id=' + ${mascotas.mascotaId}}">Editar</a>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{'/Inicio/listaMascotas/delete?id=' + ${mascotas.mascotaId}}">Borrar</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.example.lab5gtics.controller;
 
+import com.example.lab5gtics.entity.Lugares;
+import com.example.lab5gtics.entity.Mascotas;
 import com.example.lab5gtics.entity.Viajes;
 import com.example.lab5gtics.repository.LugaresRepository;
 import com.example.lab5gtics.repository.MascotasRepository;
@@ -52,12 +54,18 @@ public class HomeController {
     @GetMapping("/listaMascotas")
     public String listarMascotas(Model model) {
 
+        List<Mascotas> mascotas = mascotasRepository.findAll();
+        model.addAttribute("listaMascotas",mascotas);
+
 
         return "listaMascotas";
     }
 
     @GetMapping("/listaLugares")
     public String listarLugares(Model model) {
+
+        List<Lugares> lugares = lugaresRepository.findAll();
+        model.addAttribute("listaLugares",lugares);
 
         return "listaLugares";
     }
@@ -104,4 +112,6 @@ public class HomeController {
         return "redirect:/Inicio";
 
     }
+
+
 }
