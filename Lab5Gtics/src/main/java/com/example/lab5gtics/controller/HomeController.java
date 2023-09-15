@@ -113,5 +113,19 @@ public class HomeController {
 
     }
 
+    @GetMapping("/delete")
+    public String borrarViaje(Model model,
+                              @RequestParam("id") int id,
+                              RedirectAttributes attr) {
+
+        Optional<Mascotas> optProduct = mascotasRepository.findById(id);
+
+        if (optProduct.isPresent()) {
+            mascotasRepository.deleteById(id);
+        }
+        return "redirect:/Inicio/listaMascotas";
+
+    }
+
 
 }
